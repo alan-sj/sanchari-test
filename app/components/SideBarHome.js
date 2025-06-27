@@ -123,10 +123,38 @@ export default function SideBarHome() {
                 )}
             </div>
             <div className={`${showNavOptions?"hidden":""}`}>
-                <button type="button" className="hover:bg-white transition ease-in-out text-black my-2 w-full rounded-lg p-2 inline-flex">
-                    < EditMap/>
-                    Edit Map
-                </button>
+            
+            <button type='button'
+            className="hover:bg-white transition ease-in-out text-black my-2 w-full rounded-lg p-2 inline-flex"
+            ><EditMap />Edit Map</button>
+
+            <button 
+            type="button"
+            className="hover:bg-white transition ease-in-out text-black my-2 w-full rounded-lg p-2 inline-flex"
+            onClick={async () => {
+            try {
+                const res = await fetch('/api/insert-road', { method: 'POST' });
+                const text = await res.text();
+
+                if (res.ok) {
+                    console.log('Insert successful:', text);
+                    alert('Road feature inserted successfully!');
+                } else {
+                    console.error('Insert failed:', text);
+                    alert('Insert failed: ' + text);
+                }
+            } catch (error) {
+                console.error('Request error:', error);
+                alert('Error: ' + error.message);
+            }
+            }}
+            >
+            <EditMap />
+                Send XML
+            </button>
+
+
+
                 <button type="button" className="hover:bg-white transition ease-in-out text-black my-2 w-full rounded-lg p-2 inline-flex">
                     < AboutIcon/>
                     About
@@ -138,4 +166,4 @@ export default function SideBarHome() {
             </div>
         </div>
     );
-}
+}   
