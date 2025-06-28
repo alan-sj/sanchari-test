@@ -7,7 +7,7 @@ const UserLocation = ({ setUserPosition }) => {
       alert("Geolocation is not supported by your browser");
       return;
     }
-
+    
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
